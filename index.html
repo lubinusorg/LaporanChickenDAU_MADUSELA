@@ -315,6 +315,241 @@
   <div class="gaji-grid">
     <div class="gaji-card">
       <div class="gaji-name">👩 Umi</div>
+      <div class="gaji-row"><span style="color:var(--muted)">Gaji real diterima Umi</span><span class="positive">Rp 1.250.000</span></div>
+      <div class="gaji-row"><span style="color:var(--muted)">Pelunasan utang Umi (disimpan)</span><span class="neutral">Rp 375.000</span></div>
+      <div class="gaji-row"><span style="color:var(--muted)">Total hak Umi</span><span class="positive">Rp 1.625.000</span></div>
+      <div class="gaji-row" style="border-top:1px solid #2a2a2a;margin-top:0.3rem;padding-top:0.5rem"><span style="color:var(--muted)">Total QRIS (warung)</span><span class="neutral">Rp 1.881.000</span></div>
+      <div class="gaji-row"><span style="color:var(--muted)">Sisa QRIS warung</span><span class="neutral">Rp 50.000</span></div>
+      <div class="gaji-row"><span style="color:var(--muted)">Utang belanja ke Umi</span><span class="negative">Rp 569.800</span></div>
+    </div>
+    <div class="gaji-card">
+      <div class="gaji-name">👩 Aisyah</div>
+      <div class="gaji-row"><span style="color:var(--muted)">Hak gaji per 09/03</span><span class="positive">Rp 1.000.000</span></div>
+      <div class="gaji-row"><span style="color:var(--muted)">Diambil 10/03</span><span class="negative">- Rp 294.000 (QRIS)</span></div>
+      <div class="gaji-row"><span style="color:var(--muted)">Hak baru 10/03</span><span class="positive">+ Rp 50.000</span></div>
+      <div class="gaji-row"><span style="color:var(--muted)">Sisa hak per 10/03</span><span class="neutral">Rp 756.000</span></div>
+      <div class="gaji-row" style="border-top:1px solid #2a2a2a;margin-top:0.3rem;padding-top:0.5rem"><span style="color:var(--muted)">Total QRIS + Tunai</span><span class="positive">Rp 2.431.000</span></div>
+      <div class="gaji-row"><span style="color:var(--muted)">Rincian</span><span style="color:var(--muted);font-size:0.7rem">1.881.000 QRIS + 600.000 tunai</span></div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Akumulasi Hak Gaji Umi per Hari</div>
+    <div class="chart-wrap"><canvas id="chartGaji"></canvas></div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:1.5rem">
+    <table>
+      <t    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .tabs { padding: 0 0.5rem; }
+    .tab-content { padding: 1rem; }
+    .chart-wrap { height: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo-badge">Laporan Keuangan Lengkap</div>
+    <h1>Chicken <span>DAU</span></h1>
+    <p style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;">13 Feb — 10 Mar 2026 · 25 hari operasional</p>
+  </div>
+  <div class="period-tag">Part 1 + Part 2 · Complete</div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" onclick="switchTab('overview',this)">📊 Overview</button>
+  <button class="tab-btn" onclick="switchTab('harian',this)">📅 Rekap Harian</button>
+  <button class="tab-btn" onclick="switchTab('grafik',this)">📈 Grafik</button>
+  <button class="tab-btn" onclick="switchTab('utang',this)">💸 Utang</button>
+  <button class="tab-btn" onclick="switchTab('gaji',this)">👤 Gaji</button>
+  <button class="tab-btn" onclick="switchTab('analisis',this)">🔍 Analisis</button>
+</nav>
+
+<!-- OVERVIEW -->
+<div id="tab-overview" class="tab-content active">
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent-color:#3DDB84">
+      <span class="kpi-icon">💰</span>
+      <div class="kpi-label">Total Pendapatan</div>
+      <div class="kpi-value" id="kpi-total-jual">—</div>
+      <div class="kpi-sub">25 hari · rata² /hari</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#FF4757">
+      <span class="kpi-icon">🛒</span>
+      <div class="kpi-label">Total Modal Keluar</div>
+      <div class="kpi-value" id="kpi-total-modal">—</div>
+      <div class="kpi-sub">Belanja + operasional</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#FFB347">
+      <span class="kpi-icon">📈</span>
+      <div class="kpi-label">Hari Terbaik</div>
+      <div class="kpi-value">02/03/26</div>
+      <div class="kpi-sub">Rp 1.027.000</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#4ECDC4">
+      <span class="kpi-icon">📉</span>
+      <div class="kpi-label">Hari Terendah</div>
+      <div class="kpi-value">24/02/26</div>
+      <div class="kpi-sub">Rp 214.000</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#FF6B2B">
+      <span class="kpi-icon">⚠️</span>
+      <div class="kpi-label">Utang Aktif (Umi)</div>
+      <div class="kpi-value negative">Rp 569.800</div>
+      <div class="kpi-sub">Per 10/03/26 · turun dari puncak</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#3DDB84">
+      <span class="kpi-icon">📦</span>
+      <div class="kpi-label">Sisa Ayam Mentah</div>
+      <div class="kpi-value">2 ekor</div>
+      <div class="kpi-sub">Per 10/03/26</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#3DDB84">
+      <span class="kpi-icon">👤</span>
+      <div class="kpi-label">Hak Gaji Umi (akm.)</div>
+      <div class="kpi-value positive">Rp 1,675 jt</div>
+      <div class="kpi-sub">Per 10/03 (QRIS)</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#4ECDC4">
+      <span class="kpi-icon">👤</span>
+      <div class="kpi-label">Hak Gaji Aisyah (akm.)</div>
+      <div class="kpi-value positive">Rp 756.000</div>
+      <div class="kpi-sub">Per 10/03 (QRIS)</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Tren Penjualan Harian — 25 Hari</div>
+    <div class="chart-wrap"><canvas id="chartOverview"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Penjualan vs Modal per Hari</div>
+    <div class="chart-wrap"><canvas id="chartBar"></canvas></div>
+  </div>
+</div>
+
+<!-- REKAP HARIAN -->
+<div id="tab-harian" class="tab-content">
+  <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center">
+    <span style="font-size:0.72rem;color:var(--muted)">Filter:</span>
+    <button onclick="filterTable('all')" class="pill pill-orange" style="cursor:pointer;border:none">Semua</button>
+    <button onclick="filterTable('p1')" class="pill pill-green" style="cursor:pointer;border:none">Part 1 (Feb)</button>
+    <button onclick="filterTable('p2')" class="pill" style="cursor:pointer;border:none;background:rgba(78,205,196,0.15);color:var(--blue)">Part 2 (Mar)</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Part</th>
+          <th class="num">Penjualan</th>
+          <th class="num">Modal</th>
+          <th class="num">Selisih</th>
+          <th class="num">QRIS</th>
+          <th class="num">Utang Umi</th>
+          <th>Catatan</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+      <tfoot>
+        <tr style="background:#1a1a1a;">
+          <td colspan="2"><strong>TOTAL</strong></td>
+          <td class="num positive" id="foot-jual"><strong>—</strong></td>
+          <td class="num negative" id="foot-modal"><strong>—</strong></td>
+          <td class="num positive" id="foot-selisih"><strong>—</strong></td>
+          <td class="num" id="foot-qris">—</td>
+          <td>—</td><td>—</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- GRAFIK -->
+<div id="tab-grafik" class="tab-content">
+  <div class="chart-card">
+    <div class="chart-title">Penjualan vs Modal (Line)</div>
+    <div class="chart-wrap" style="height:300px"><canvas id="chartLine2"></canvas></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+    <div class="chart-card">
+      <div class="chart-title">Tren Utang ke Umi</div>
+      <div class="chart-wrap" style="height:240px"><canvas id="chartUtang"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Distribusi Produk (Est.)</div>
+      <div class="chart-wrap" style="height:240px"><canvas id="chartDoughnut"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Surplus / Defisit Harian (Penjualan - Modal)</div>
+    <div class="chart-wrap"><canvas id="chartSelisih"></canvas></div>
+  </div>
+</div>
+
+<!-- UTANG -->
+<div id="tab-utang" class="tab-content">
+  <div class="kpi-grid" style="margin-bottom:1.5rem">
+    <div class="kpi-card" style="--accent-color:#FF4757">
+      <div class="kpi-label">Puncak Utang</div>
+      <div class="kpi-value negative">Rp 1.472.800</div>
+      <div class="kpi-sub">05/03/26</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#3DDB84">
+      <div class="kpi-label">Utang Saat Ini</div>
+      <div class="kpi-value negative">Rp 569.800</div>
+      <div class="kpi-sub">Per 10/03 · turun 61%</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#FFB347">
+      <div class="kpi-label">Total Dibayar</div>
+      <div class="kpi-value neutral">Rp 903.000</div>
+      <div class="kpi-sub">Sejak puncak</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--font-head);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:1rem;">Utang Aktif</h3>
+  <div class="utang-list">
+    <div class="utang-item">
+      <div>
+        <div class="utang-name">Utang Belanja ke Umi</div>
+        <div class="utang-desc">Sisa nota belanja bahan baku. Per 10/03/26 setelah bayar 300.000.</div>
+      </div>
+      <div class="utang-amount">Rp 569.800</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--font-head);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin:1.5rem 0 1rem;">Riwayat Pembayaran Utang</h3>
+  <div class="utang-list">
+    <div class="utang-item lunas"><div><div class="utang-name">Utang Umi awal (164rb)</div><div class="utang-desc">Lunas 17/02/26</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Utang Modal Umi 16/02 (540.700)</div><div class="utang-desc">Lunas 17/02/26</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Utang ke Uwa Susi (50.000)</div><div class="utang-desc">Lunas ~18/02/26</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Utang Modal Umi 105.300</div><div class="utang-desc">Lunas 19/02/26</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Utang Jasa Pesanan 210.000</div><div class="utang-desc">15 paket paha+nasi, lunas 21/02</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Utang ke Uwa (kembalian) 150.000</div><div class="utang-desc">Lunas sekitar 24/02</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Bayar Umi 100.000 (24/02)</div><div class="utang-desc">Cicilan dari utang lama</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Bayar Umi 22.000 (25/02)</div><div class="utang-desc">Cicilan</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Bayar nota 129.000 (06/03)</div><div class="utang-desc">1.472.800 → 1.343.800</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Bayar Umi 296.000 + 178.000 (09/03)</div><div class="utang-desc">1.343.800 → 869.800</div></div><div class="utang-amount">LUNAS</div></div>
+    <div class="utang-item lunas"><div><div class="utang-name">Bayar Umi 300.000 (10/03)</div><div class="utang-desc">869.800 → 569.800</div></div><div class="utang-amount">LUNAS</div></div>
+  </div>
+
+  <h3 style="font-family:var(--font-head);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin:1.5rem 0 1rem;">Piutang Kecil</h3>
+  <div class="utang-list">
+    <div class="utang-item" style="border-left-color:var(--blue)">
+      <div><div class="utang-name">Kembalian Koh Aji</div><div class="utang-desc">Lupa kembalikan sejak 13/02/26</div></div>
+      <div class="utang-amount" style="color:var(--blue)">Rp 2.000</div>
+    </div>
+  </div>
+</div>
+
+<!-- GAJI -->
+<div id="tab-gaji" class="tab-content">
+  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem;">Akumulasi hak gaji berdasarkan pencatatan QRIS harian. Potongan & pengambilan dicatat terpisah.</p>
+  <div class="gaji-grid">
+    <div class="gaji-card">
+      <div class="gaji-name">👩 Umi</div>
       <div class="gaji-row"><span style="color:var(--muted)">Total gaji via QRIS</span><span class="positive">Rp 1.831.000</span></div>
       <div class="gaji-row"><span style="color:var(--muted)">Total gaji tunai</span><span class="positive">Rp 600.000</span></div>
       <div class="gaji-row"><span style="color:var(--muted)">Total keseluruhan</span><span class="positive">Rp 2.431.000</span></div>
